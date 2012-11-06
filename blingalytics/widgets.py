@@ -305,7 +305,10 @@ class Multiselect(Select):
             raise ValidationError('Could not convert input to list of IDs.')
 
         choices = self.get_choices()
-        return [choices[i][0] for i in indexes]
+        # choices might not be predefined
+        if choices:
+            return [choices[i][0] for i in indexes]
+        return indexes
 
 class TimezoneSelect(Select):
     """
